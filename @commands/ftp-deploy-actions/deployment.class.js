@@ -2,8 +2,8 @@ const {join, relative} = require('path')
 const {statSync} = require('fs')
 const FtpClient = require('ftp')
 const glob = require('glob')
-const {blue} = require('chalk')
-const {throwErr, logOK, inline} = require('../../lib/helpers/console')
+const {blue, red} = require('chalk')
+const {throwErr, logOK, inline, log} = require('../../lib/helpers/console')
 
 class Deployment extends FtpClient {
     constructor(publicDir, destDir) {
@@ -45,8 +45,11 @@ class Deployment extends FtpClient {
 
     uploadFile(src, dest) {
         this.put(src, dest, err => {
-            if (err) throwErr(err.toString())
             inline(`Uploaded ${blue(relative(this.publicDir, src))} to ${blue(dest)}...`)
+            if (err) {
+                log(red('ERROR'))
+                throwErr(err.toString())
+            }
             logOK()
             this.end()
         })
