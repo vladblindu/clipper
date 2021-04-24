@@ -1,0 +1,29 @@
+{
+  "name": "clipper",
+  "version": "0.1.1",
+  "description": "CLI keeper",
+  "author": "bitbrother",
+  "license": "MIT",
+  "repository": "https://github.com/vladblindu/staki.git",
+  "private": false,
+  "bin": "./index.js",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^6.2.1",
+    "esm": "^3.2.25",
+    "execa": "^5.0.0",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "inquirer": "^7.3.3",
+    "jsdoc-to-markdown": "^6.0.1"
+  },
+  "scripts": {
+    "test": "NODE_ENV=TEST mocha test/**/*.specs.js"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "dotenv": "^8.2.0",
+    "ftp": "^0.3.10",
+    "mocha": "^8.3.1"
+  }
+}

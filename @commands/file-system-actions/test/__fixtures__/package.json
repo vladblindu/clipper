@@ -1,0 +1,10 @@
+{
+  "name": "test-root-pkg",
+  "workspaces": [
+    "packages/*"
+  ],
+  "wsMap": {
+    "package1": "/Users/vlad/Documents/zecode/@production/base-project/bin/@commands/lnk/test/__fixtures__/packages/package1",
+    "package2": "/Users/vlad/Documents/zecode/@production/base-project/bin/@commands/lnk/test/__fixtures__/packages/package2"
+  }
+}

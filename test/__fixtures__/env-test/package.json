@@ -1,0 +1,9 @@
+{
+  "name": "env-tester",
+  "version": "1.0.0",
+  "staki": {
+    "env": [
+      "test-key"
+    ]
+  }
+}

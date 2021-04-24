@@ -1,0 +1,11 @@
+{
+  "name": "test-pack",
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "wsMap": {
+    "package1": "/Users/vlad/Documents/zecode/@lib/clipper/test/__fixtures__/fda/packages/package1",
+    "package2": "/Users/vlad/Documents/zecode/@lib/clipper/test/__fixtures__/fda/packages/package2"
+  }
+}

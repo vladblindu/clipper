@@ -1,0 +1,8 @@
+{
+  "name": "@package1/test-pack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:/vladblindu/test-repo.git",
+  "author": "Vlad Blindu <vlad.blindu@gmail.com>",
+  "license": "MIT"
+}

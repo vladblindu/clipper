@@ -1,0 +1,11 @@
+{
+  "comp-internal": "comp3",
+  "en": {
+    "key1-comp-int-pack1": "en-val1",
+    "key2-comp-int-pack1": "en-val2"
+  },
+  "ro": {
+    "key1-comp-int-pack1": "ro-val1",
+    "key2-comp-int-pack1": "ro-val2"
+  }
+}

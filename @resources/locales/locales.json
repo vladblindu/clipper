@@ -1,0 +1,90 @@
+{
+  "al": {
+    "name": "albanian",
+    "flagFile": "albania"
+  },
+  "ar": {
+    "name": "arabian",
+    "flagFile": "arabia"
+  },
+  "bg": {
+    "name": "bulgarian",
+    "flagFile": "bulgaria"
+  },
+  "cr": {
+    "name": "croatian",
+    "flagFile": "croatia"
+  },
+  "ck": {
+    "name": "czech",
+    "flagFile": "czech"
+  },
+  "dk": {
+    "name": "danish",
+    "flagFile": "denmark"
+  },
+  "en": {
+    "name": "english",
+    "flagFile": "uk"
+  },
+  "fr": {
+    "name": "french",
+    "flagFile": "france"
+  },
+  "de": {
+    "name": "deutsch",
+    "flagFile": "germany"
+  },
+  "gr": {
+    "name": "greek",
+    "flagFile": "greece"
+  },
+  "hu": {
+    "name": "hungarian",
+    "flagFile": "hungary"
+  },
+  "lt": {
+    "name": "lithuanian",
+    "flagFile": "lithuania"
+  },
+  "no": {
+    "name": "norwegian",
+    "flagFile": "norway"
+  },
+  "pt": {
+    "name": "polish",
+    "flagFile": "poland"
+  },
+  "po": {
+    "name": "portuguese",
+    "flagFile": "portugal"
+  },
+  "ro": {
+    "name": "romanian",
+    "flagFile": "romania"
+  },
+  "ru": {
+    "name": "russian",
+    "flagFile": "russia"
+  },
+  "sb": {
+    "name": "serbian",
+    "flagFile": "serbia"
+  },
+  "sk": {
+    "name": "slovakian",
+    "flagFile": "slovakia"
+  },
+  "es": {
+    "name": "spanish",
+    "flagFile": "spain"
+  },
+  "sw": {
+    "name": "swedish",
+    "flagFile": "sweden"
+  },
+  "us": {
+    "name": "american-english",
+    "flagFile": "us"
+  }
+}

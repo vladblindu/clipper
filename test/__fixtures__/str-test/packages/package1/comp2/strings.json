@@ -1,0 +1,10 @@
+{
+  "en": {
+    "key1--comp2-pack1": "en-val1",
+    "key2--comp2-pack1": "en-val2"
+  },
+  "ro": {
+    "key1--comp2-pack1": "ro-val1",
+    "key2--comp2-pack1": "ro-val2"
+  }
+}

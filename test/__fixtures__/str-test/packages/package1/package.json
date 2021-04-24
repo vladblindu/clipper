@@ -1,0 +1,17 @@
+{
+  "name": "test-pkg",
+  "staki": {
+    "stringer": {
+      "langs": [
+        "en",
+        "ro"
+      ],
+      "defaultLang": {
+        "defaultLang": "en"
+      },
+      "srcRoot": "src",
+      "destRoot": "public/locales",
+      "configRoot": "@config/strings"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "test-root-pkg",
+  "workspaces": [
+    "packages/*"
+  ],
+  "wsMap": {
+    "static-server": "/Users/vlad/Documents/zecode/@production/base-project/bin/@commands/ssg/test/__fixtures__/base/packages/static-server",
+    "front-pack": "/Users/vlad/Documents/zecode/@production/base-project/bin/@commands/ssg/test/__fixtures__/base/packages/front-pack"
+  }
+}
