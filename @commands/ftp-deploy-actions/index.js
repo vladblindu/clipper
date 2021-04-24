@@ -11,8 +11,10 @@ const {join} = require('path')
 const {throwErr} = require('../../lib/helpers/console')
 const {findPackage} = require('../../lib/helpers/fs')
 const Deployment = require('./deployment.class')
+const {log} = require('../../lib/helpers/console')
 
 const short = 'fda'
+const alias = 'deploy'
 const long = 'ftpDeploymentAction'
 const command = 'fda [pkg]'
 const description = [
@@ -23,8 +25,7 @@ const description = [
 const option = [
     [
         '-d, --dest <type>',
-        'Ftp destination dir, defaults to "/"',
-        '/'
+        'Ftp destination dir, defaults to "/"'
     ],
 ]
 
@@ -47,14 +48,16 @@ const action = (pkgName='', cmdObj) => {
         console.error('FATAL ERROR: No valid credentials found in environment.')
         process.exit(1)
     }
-    const [pkg, root] = findPackage(pkgName)
+    const [pkg, root, wsPkg] = findPackage(pkgName)
     const {publicDir} = pkg
     if(!publicDir) throwErr('This doesn\'t look to be a frontend package. No "publicDir" key found in package.json')
-    new Deployment(join(root, publicDir), cmdObj.dest)
+    log('Deploying to dev live server:')
+    new Deployment(join(root, publicDir), cmdObj.dest || wsPkg.name)
 }
 
 module.exports = {
     short,
+    alias,
     long,
     command,
     description,

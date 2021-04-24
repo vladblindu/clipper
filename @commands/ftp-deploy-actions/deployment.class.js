@@ -1,26 +1,27 @@
-const {lstatSync} = require('fs')
-const {join} = require('path')
+const {join, relative} = require('path')
+const {statSync} = require('fs')
 const FtpClient = require('ftp')
 const glob = require('glob')
-const {throwErr} = require('../../lib/helpers/console')
+const {blue} = require('chalk')
+const {throwErr, logOK, inline} = require('../../lib/helpers/console')
 
 class Deployment extends FtpClient {
     constructor(publicDir, destDir) {
         super()
         this.publicDir = publicDir
-        this.destDir = destDir || '/'
+        this.destDir = destDir
         this.connect({
             host: process.env.DEV_FTP_HOST,
             password: process.env.DEV_FTP_PASSWORD,
             user: process.env.DEV_FTP_USER,
-            port: 21,
-            passive: true
+            port: 21
         })
 
         this.on(
             'ready', () => {
                 const files = glob.sync(`**/*`, {
-                    cwd: this.publicDir || './__public__'
+                    cwd: this.publicDir,
+                    follow: true
                 })
                 files.forEach(this.handlePath)
             }
@@ -37,15 +38,16 @@ class Deployment extends FtpClient {
 
     createDir(dir) {
         return this.mkdir(dir, true, err => {
-            if (err) throw err
+            if (err) throwErr(err.message)
             this.end()
         })
     }
 
-    uploadFile(file, dest) {
-        this.put(file, dest, (error) => {
-            if (error) throw error
-            console.log(`${file} => ${dest}`)
+    uploadFile(src, dest) {
+        this.put(src, dest, err => {
+            if (err) throwErr(err.toString())
+            inline(`Uploaded ${blue(relative(this.publicDir, src))} to ${blue(dest)}...`)
+            logOK()
             this.end()
         })
     }
@@ -53,10 +55,10 @@ class Deployment extends FtpClient {
     handlePath(pth) {
         const dest = join(this.destDir, pth)
         const src = join(this.publicDir, pth)
-        if (lstatSync(src).isDirectory()) {
+        if (statSync(src).isDirectory()) {
             return this.createDir(dest)
         }
-        return this.uploadFile(pth, dest)
+        return this.uploadFile(src, dest)
     }
 }
 
