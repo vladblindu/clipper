@@ -10,11 +10,11 @@ const setupHooks = () => {
     let modelPath = ''
     let [pkg] = findRoot()
 
-    if (!pkg['wsMap'])
+    if (!pkg[WS_MAP_KEY])
         throwErr('Root package json has no wsMap key meaning you should run the "ini -m" command first to map the packages')
 
     try {
-        modelPath = Object.values(pkg['wsMap']).reduce(
+        modelPath = Object.values(pkg[WS_MAP_KEY]).reduce(
             /**
              *
              * @param {string} acc
@@ -32,7 +32,7 @@ const setupHooks = () => {
         throwErr(e)
     }
 
-    Object.values(pkg['wsMap']).forEach(
+    Object.values(pkg[WS_MAP_KEY]).forEach(
         root => {
             getStaticComponents(root).forEach(
                 comp => {

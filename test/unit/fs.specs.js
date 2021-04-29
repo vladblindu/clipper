@@ -1,7 +1,7 @@
 const {readFileSync, unlinkSync, writeFileSync} = require('fs')
 const {join, resolve} = require('path')
 const {expect} = require('chai')
-const {findPackage, findRoot, getPackage, mapPackages, putPackage, registerWsMap} = require('../../lib/helpers/fs')
+const {findPackage, findRoot, getPackage, mapPackages, putPackage, registerWsMap, pathFromObj} = require('../../lib/helpers/fs')
 const {PKG, WORKSPACE} = require('../../lib/constants')
 
 describe('fs unit tests', () => {
@@ -27,7 +27,7 @@ describe('fs unit tests', () => {
 
     const insertWsMap = () => {
         const pkg = JSON.parse(readFileSync(testWsRoot, 'utf8'))
-        pkg['wsMap'] = map
+        pkg[WS_MAP_KEY] = map
         writeFileSync(testWsRoot, JSON.stringify(pkg, null, 2))
     }
 
@@ -169,6 +169,56 @@ describe('fs unit tests', () => {
             registerWsMap()
             const pkg = JSON.parse(readFileSync(testWsRoot, 'utf8'))
             expect(pkg.wsMap).to.deep.equal(map)
+        })
+    })
+
+    describe('pathFromObj', () => {
+
+        it('should build the right path for simple obj', () => {
+            const testObj = {
+                root: 'root',
+                dir1: 'dir1',
+            }
+            expect(pathFromObj('dir1', testObj)).to.equal(join('root', 'dir1'))
+        })
+
+        it('should build the right path for complex obj', () => {
+            const testObj = {
+                root: 'root',
+                dir1: 'dir1',
+                dir2:{
+                    dir3: {
+                        dir4: 'dir4'
+                    }
+                },
+                dir5: 'dir5'
+            }
+            expect(pathFromObj('dir4', testObj)).to.equal(join('root', 'dir2', 'dir3', 'dir4'))
+        })
+
+        it('should throw for empty obj', () => {
+            const testObj = {}
+            expect(() => {
+                pathFromObj('dir1', testObj)
+            }).to.throw
+        })
+
+        it('should throw for empty key', () => {
+            const testObj = {
+                root: 'root',
+                dir1: 'dir1',
+            }
+            expect(() => {
+                pathFromObj('', testObj)
+            }).to.throw
+        })
+        it('should throw for no root key', () => {
+            const testObj = {
+                root: 'root'
+            }
+            expect(() => {
+                pathFromObj('dir', testObj)
+            }).to.throw
         })
     })
 })

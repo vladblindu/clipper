@@ -48,7 +48,7 @@ const execAll = (pkgName, force) => {
         }
     )
     logOK()
-    Object.keys(wsPkg['wsMap']).forEach(pkgName => {
+    Object.keys(wsPkg[WS_MAP_KEY]).forEach(pkgName => {
         execPkg(pkgName, force)
     })
 
