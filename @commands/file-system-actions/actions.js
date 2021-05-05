@@ -1,9 +1,12 @@
+const {relative} = require('path')
+const {readFileSync, writeFileSync} = require('fs')
 const {collectFsa, dirList, linkList} = require('./helpers')
 const {createDir, createLink, findPackage, findRoot, putPackage} = require('../../lib/helpers/fs')
-const {inline, log, logOK, throwErr} = require('../../lib/helpers/console')
+const {warn, inline, log, logOK, throwErr} = require('../../lib/helpers/console')
 const {basename, dirname, join} = require('path')
-const {BLUE, PKG} = require('../../lib/constants')
+const {BLUE, PKG, WS_MAP_KEY} = require('../../lib/constants')
 const {blue} = require('chalk')
+const {GITIGNORE, GITIGNORE_PKG_COMMENT} = require('./constants')
 
 const iterateFsa = (fsa, linkAct, dirAct) => Object.keys(fsa).forEach(
     k => {
@@ -84,11 +87,41 @@ const list = pkgName => {
     iterateFsa(pkg['fsa'], linkList, dirList)
 }
 
+
+export const addToGitIgnore = pkgName => {
+    const [pkg, root, , wsRoot] = findPackage(pkgName)
+    const ignorePath = join(wsRoot, GITIGNORE)
+
+    if(!pkg.links || !Object.keys(pkg.links).length) {
+        warn(`No links found in ${pkg.name}. If there should be any, please register them before running this command.`)
+        return []
+    }
+    const ignored = Object.values(pkg.links).map(
+        /**
+         * @param {string}dest
+         * @returns {string}
+         */
+        dest => relative(wsRoot, join(root, dest))
+    ).join('\n').concat('\n')
+    const tmp = readFileSync(ignorePath, 'utf8')
+
+    const splitPoint = GITIGNORE_PKG_COMMENT.concat(pkg.name, '\n')
+    const [safe, pkgIgnore]= tmp.split(splitPoint)
+    let rest = ''
+    if(pkgIgnore.length) {
+        [, rest] = pkgIgnore.split('#')
+        if(rest) rest = '#'.concat(rest)
+    }
+    const newIgnore = safe.concat(splitPoint, ignored, rest)
+    writeFileSync(ignorePath, newIgnore)
+}
+
 module.exports = {
     execPkg,
     execAll,
     registerLink,
     registerExternal,
     registerDir,
-    list
+    list,
+    addToGitIgnore
 }

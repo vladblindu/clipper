@@ -7,6 +7,6 @@
   "license": "MIT",
   "links": {
     "README.md": "README.md",
-    "directory1/test-folder": "testdir/folder1"
+    "directory1/test-folder": "testDir/folder1"
   }
 }

@@ -24,6 +24,8 @@ class Deployment extends FtpClient {
                     follow: true
                 })
                 files.forEach(this.handlePath)
+                if(!files.length)
+                    throwErr(`No files to upload found in: ${this.publicDir}`)
             }
         )
         this.on('error', err => {

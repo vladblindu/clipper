@@ -1,0 +1,11 @@
+# test comment
+node_modules
+.idea
+**/other-stuff
+# another comment
+# pkg: @package2/test-pack
+packages/package2/README.md
+packages/package2/testDir/folder1
+# pkg: @package1/test-pack
+.other-stuff
+**/rest
